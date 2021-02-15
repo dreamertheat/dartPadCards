@@ -1,7 +1,14 @@
 void main() {
   var d = Deck();
   //print(d.returnSuit(Deck.CLUBS));
-  print(d.selectCard(Deck.SEVEN,Deck.HEARTS));
+  d.selectCard(Deck.SEVEN,Deck.HEARTS);
+  d.selectCard(Deck.FOUR,Deck.HEARTS);
+  d.selectCard(Deck.ACE,Deck.HEARTS);
+  d.selectCard(Deck.NINE,Deck.HEARTS);
+  d.selectCard(Deck.TWO,Deck.HEARTS);
+
+
+  print(d.getAllCardCount());
 }
 
 class Card {
@@ -116,6 +123,7 @@ class Deck {
     Iterable<Card> cd =  cardList.where((Card){
       
       if(Card.rank==rank&&Card.suit==suit){
+          removeCard(Card);
           return true;
       }else{
           return false;
@@ -123,8 +131,23 @@ class Deck {
       
     });
     
+    
+    
+      
     return cd.first;
       
+  }
+  
+  void removeCard(Card c){
+    cardList.removeWhere((Card){
+      if(c.rank==Card.rank&&c.suit==Card.suit){
+        return true;
+      } else{
+        return false;
+      }
+    });
+    
+    
   }
   
   String displayByList(Iterable<Card> cards){
