@@ -1,14 +1,10 @@
 void main() {
   var d = Deck();
   //print(d.returnSuit(Deck.CLUBS));
-  d.selectCard(Deck.SEVEN,Deck.HEARTS);
-  d.selectCard(Deck.FOUR,Deck.HEARTS);
-  d.selectCard(Deck.ACE,Deck.HEARTS);
-  d.selectCard(Deck.NINE,Deck.HEARTS);
-  d.selectCard(Deck.TWO,Deck.HEARTS);
 
 
-  print(d.getAllCardCount());
+
+  print(d.selectBySuit(Deck.CLUBS));
 }
 
 class Card {
@@ -150,6 +146,9 @@ class Deck {
     
   }
   
+  
+  
+  
   String displayByList(Iterable<Card> cards){
     String xx = "";
     for(Card x in cards){
@@ -160,7 +159,45 @@ class Deck {
     
   }
   
+  List<Card> selectByRank(String rank){
+    
+    Iterable<Card> cd =  cardList.where((Card){
+      
+      if(Card.rank==rank){
+          
+          return true;
+      }else{
+          return false;
+      }
+      
+    });
+    
+    
+    
+      
+    return cd.toList();
+      
+  }
   
+  List<Card> selectBySuit(String suit){
+    
+    Iterable<Card> cd =  cardList.where((Card){
+      
+      if(Card.suit==suit){
+          
+          return true;
+      }else{
+          return false;
+      }
+      
+    });
+    
+    
+    
+      
+    return cd.toList();
+      
+  }
  
   
   
