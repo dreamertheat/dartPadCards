@@ -2,9 +2,12 @@ void main() {
   var d = Deck();
   //print(d.returnSuit(Deck.CLUBS));
 
+  List<Card> cards = d.selectBySuit(Deck.CLUBS);
+  print(cards);
+  print(d.getAllCardCount());
+  d.removeMulti(cards);
+    print(d.getAllCardCount());
 
-
-  print(d.selectBySuit(Deck.CLUBS));
 }
 
 class Card {
@@ -146,6 +149,23 @@ class Deck {
     
   }
   
+  void removeMulti(List<Card> cc){
+    
+    
+    for(Card c in cc){
+    
+    cardList.removeWhere((Card){
+      if(c.rank==Card.rank&&c.suit==Card.suit){
+        return true;
+      } else{
+        return false;
+      }
+    });
+      
+    }
+    
+  }
+  
   
   
   
@@ -172,8 +192,9 @@ class Deck {
       
     });
     
+    print(cd.toList);
     
-    
+    //removeMulti(cd.toList());
       
     return cd.toList();
       
