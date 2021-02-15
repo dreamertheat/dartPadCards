@@ -1,0 +1,145 @@
+void main() {
+  var d = Deck();
+  //print(d.returnSuit(Deck.CLUBS));
+  print(d.selectCard(Deck.SEVEN,Deck.HEARTS));
+}
+
+class Card {
+  final String rank;
+  final String suit;
+
+  Card(this.rank, this.suit);
+  
+  String toString(){
+    return rank+" of "+suit;
+  }
+}
+
+class Deck {
+  
+  static final String HEARTS = "Hearts";
+  static final String SPADES = "Spades";
+  static final String DIAMONDS = "Diamonds";
+  static final String CLUBS = "Clubs";
+  
+  static final String TWO = "2";
+  static final String THREE = "3";
+  static final String FOUR = "4";
+  static final String FIVE = "5";
+  static final String SIX = "6";
+  static final String SEVEN = "7";
+  static final String EIGHT = "8";
+  static final String NINE = "9";
+  static final String TEN = "10";
+  static final String JACK = "Jack";
+  static final String QUEEN = "Queen";
+  static final String KING = "King";
+  static final String ACE = "Ace";
+
+  
+  Deck() {
+    deckCreator();
+    shuffle();
+  }
+
+  List<Card> cardList = List<Card>();
+  void addCard(Card card) {
+    cardList.add(card);
+  }
+
+  List<String> ranks = [
+    'Ace',
+    'King',
+    'Queen',
+    'Jack',
+    '2',
+    '3',
+    '4',
+    '5',
+    '6',
+    '7',
+    '8',
+    '9',
+    '10'
+  ];
+  List<String> suits = [HEARTS, SPADES, DIAMONDS, CLUBS];
+
+  void deckCreator() {
+    for (int x = 0; x < suits.length; x++) {
+      for (int y = 0; y < ranks.length; y++) {
+        var card = Card(ranks[y], suits[x]);
+        addCard(card);
+      }
+    }
+  }
+  String toString(){
+    return cardList.toString();
+    
+  }
+  String bySuit(String name){
+    String xx = "";
+    for(Card x in cardList){
+        if(x.suit.contains(name))
+        xx+= x.rank+" of "+x.suit+"\n";
+    
+    } 
+    return xx+"\n\n\n\n";
+    
+  }
+  String getAllCardCount() {
+    return cardList.length.toString();
+  }
+  
+  void shuffle(){
+    cardList.shuffle();
+  }
+  
+  //returns a trimmed collection
+  returnSuit(String s){
+     return cardList.where((Card)
+        => Card.suit==s
+     );
+  }
+  
+  
+  dealCards(int count){
+
+    var hand =  cardList.sublist(0,count);
+    cardList = cardList.sublist(count);
+    return hand;
+  }
+  
+  
+  
+  Card selectCard(String rank, String suit){
+    
+    Iterable<Card> cd =  cardList.where((Card){
+      
+      if(Card.rank==rank&&Card.suit==suit){
+          return true;
+      }else{
+          return false;
+      }
+      
+    });
+    
+    return cd.first;
+      
+  }
+  
+  String displayByList(Iterable<Card> cards){
+    String xx = "";
+    for(Card x in cards){
+        xx+= x.rank+" of "+x.suit+"\n";
+    
+    } 
+    return xx+"\n\n\n\n";
+    
+  }
+  
+  
+ 
+  
+  
+  
+}
