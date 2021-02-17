@@ -1,0 +1,33 @@
+import 'dart:convert';
+
+void main() {
+    
+  
+  var g = '{"albumId": 1,"id": 1,"title": "ss",'+
+  '"url": "https://via.placeholder.com/600/92c952",'+
+  '"thumbnailUrl": "https://via.placeholder.com/150/92c952"}';
+  
+  
+  var p = Picture.fromJson(g);
+  print(p.title);
+  
+ 
+
+}
+
+
+class Picture{
+
+  int id, albumId;
+  String title, thumbnailUrl;
+  
+  Picture(id,albumId,title,thumbnailUrl);
+  Picture.fromJson(String s){
+    var g  = json.decode(s);
+    
+    id=g["id"];albumId=g["albumId"];title =g["title"]; 
+    thumbnailUrl =g["thumbnailUrl"];
+  }
+  
+}
+
