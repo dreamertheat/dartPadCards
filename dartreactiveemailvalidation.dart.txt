@@ -1,0 +1,63 @@
+import 'dart:html';
+import 'dart:async';
+void main() {
+  
+ 
+  final ButtonElement button = querySelector("button");
+  final InputElement input = querySelector("input");
+  final DivElement div = querySelector("div");
+  
+  
+  final emailValidator =  StreamTransformer.fromHandlers(
+      handleData:(val,sink){
+          if(val.contains("@")){
+            sink.add(val);
+          }else{
+            sink.addError("fail");
+          }
+      }
+  );
+  
+  
+  input.onInput
+    .map(
+    (dynamic event){
+        return event.target.value;
+    }
+  ).transform(emailValidator)
+    .listen(
+    (success){
+      div.innerHtml="";
+    },
+    onError:(error){
+      div.innerHtml=error;
+    }
+  );
+  
+  
+  button.onClick.take(4).where(
+    (event){
+      if(input.value == "12345"){
+        return true;
+      }else{
+        return false;
+      }
+    }
+  ).listen(
+    (success){
+      print("success!");
+    },
+    onError:(error){
+      print("error");
+    },
+    onDone:(){
+      print("done1");
+    }
+    
+    
+  ).onDone((){
+     print("done"); 
+  });
+    
+  
+}
